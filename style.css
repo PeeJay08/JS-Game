@@ -1,0 +1,229 @@
+:root{
+    --image-width:157px;
+    --image-height:220px;
+    --image-width-sm:120px;
+    --image-height-sm:168px;
+    --num-images:4;
+    --image-horizontal-space: 100px;
+    --image-horizontal-space-sm: 50px;
+    --badge-bg-color:#ffff;
+    --primary-color:black;
+    --secondary-color:darkgrey;
+}
+body{
+    height: 100vh;
+    font-family: 'Press Start 2P', cursive;
+    background-image: url('./images/mario-background.jpg');
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+main{
+    height: 55%;
+    display: flex;
+    justify-content: center;
+}
+.image-container{
+    position: relative;
+    height: 100%;
+    width: calc(var(--image-width) * (var(--num-images) / 2) + var(--image-horizontal-space));
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "a b"
+                        "c d";   
+}
+.image-pos-a{
+    grid-area: a;
+}
+.image-pos-b{
+    grid-area: b;
+}
+.image-pos-c{
+    grid-area: c;
+}
+.image-pos-d{
+    grid-area: d;
+}
+.image-pos-a, .image-pos-b, .image-pos-c, .image-pos-d{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image{
+    position: absolute;
+    height: var(--image-height);
+    width: var(--image-width);
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 0.6s ease-in-out;
+}
+.image-inner{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+.image-front, .image-back{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+.card-img{
+    height: 100%;
+    width: 195px;
+    border-radius: 10px;
+
+}
+.image-back{
+    transform: rotateY(180deg);
+}
+.image-inner.flip-it{
+    transform: rotateY(180deg);
+}
+header{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.header-title{
+    display: flex;
+    justify-content: center;
+}
+.header-round-info{
+    display: flex;
+    justify-content: space-evenly;
+}
+.current-status{
+    font-size: 1.5rem;
+    text-align: center;
+}
+.header-status, .header-button, .header-score, .header-round, .header-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header-score, .header-round, .header-image{
+       width: 250px;
+}
+.header-img{
+    background-color: #fff;
+    height: 100px;
+    border-radius: 5px;
+    border: 1px solid black;    
+    padding: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);     
+    transform: rotate(-3deg);       
+}
+.badge{
+    width: auto;
+    background-color: var(--badge-bg-color);
+    color: var(--secondary-color);
+    padding: 2px 10px 3px;
+    border-radius: 15px;
+    margin:0 auto;
+}
+.game-play-button{
+    width: 180px;
+    height: 70px;
+}
+#playGame {
+  align-self: center;
+  background-color: var(--badge-bg-color);
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #41403e;
+  cursor: pointer;
+  display: none;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  animation: game-play-button-fade-in 10s 1;
+}
+#playGame:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+#playGame:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+@keyframes game-play-button-fade-in{
+    from{opacity: 0;}
+    to{opacity: 1;}
+}
+.image.shuffle-left{
+    transform: translateX(300px) translateY(40px);
+}
+.image.shuffle-right{
+    transform: translateX(-350px) translateY(-40px);
+}
+.image.fly-in{
+    transform: translateY(-1000px) translateX(-600px) rotate(45deg);
+}
+@media screen and (max-width:600px){
+    .image{
+        width: var(--image-width-sm);
+        height: var(--image-height-sm);
+    }
+    .image-container{
+        width: calc(var(--image-width-sm)* (var(--num-images)/2) + var(--image-horizontal-space-sm));
+    }
+    main{
+        height: 50%;
+    }
+    h1{
+        font-size: 1.2rem;
+        text-align: center;
+    }
+    .current-status{
+        font-size: 1rem;
+    }
+    .card-img{
+        height: 100%;
+        width: 100%;
+    }
+    .game-play-button{
+        width: 150px;
+        height: 40px;
+    }
+    #playGame{
+        padding: 6px 8px;
+        font-size: 12px;
+        min-height: 40px;
+    }
+    .header-img{
+        height: 55px;
+    }
+    .score, .round{
+        text-align: center;
+        font-size: 1rem;
+    }
+    .image.shuffle-left{
+        transform: translateX(80px) translateY(40px);
+    }
+    .image.shuffle-right{
+        transform: translateX(-90px) translateY(-40px);
+    }
+}
